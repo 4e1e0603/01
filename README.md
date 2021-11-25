@@ -5,6 +5,7 @@ _Simplictic simulations of various types of random walks._
 - Simple random walks
   - [x] Random walk on regular 1D lattice where you can step in any of the two directions {↑, ↓} with the same probability.
   - [x] Random walk on regular 2D lattice where you can step in any of the four directions {↑, ←, ↓, →} with the same probability.
+  - [x] Random walk on regular 3D lattice where you can step in any of the six directions {↑, ←, ↙, ↓, →, ↗} with the same probability.
 
 - Restricted random walks
   - [ ] Random walk on regular lattice without immediate return where you can step in three possible directions with the same probability,
