@@ -54,7 +54,10 @@ program random_walk_main
 
     outputs = simulate(trials=trials, steps=steps, randoms=randoms)
 
+    print *, randoms
+
     do trial = 1, trials
+
         do step = 1, steps
             write(*,'(f0.1,a,f0.1,a,f0.1)')  &
                  outputs(trial, step, 1), '|', &
