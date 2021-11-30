@@ -30,7 +30,7 @@ Result = typing.Generator[State, None, None]
 __all__ = tuple(["simulate", "visualize"])
 
 
-def simulate(steps: int, state: State, restricted = False) -> Result:
+def simulate(steps: int, state: State, restricted = False) -> typing.Generator[Result, None, None]:
     """
     Simulate a random walk on 1/2/3-dimensional regular lattice.
 
@@ -50,6 +50,7 @@ def simulate(steps: int, state: State, restricted = False) -> Result:
     # The previous state for restrickted version.
     previous_increment, previous_dimension = 0, 0
 
+    # The anonymus function to generate random state.
     generate_increment_dimension = lambda: \
         ( random.choice([-1, 1]),
           random.choice([_ for _ in range( 0, len(state[-1]))])
@@ -64,11 +65,13 @@ def simulate(steps: int, state: State, restricted = False) -> Result:
             while (previous_increment, previous_dimension) == (-increment, dimension):
                 increment, dimension = generate_increment_dimension()
 
+        # Save the current state for the next cycle.
         previous_increment, previous_dimension = increment, dimension
 
+        # Update time and appropriate space coordinate.
         time += 1; space[dimension] += increment
 
-        yield time, tuple(space)
+        yield time, tuple(space) # The generated (yielde) return value.
 
 
 def visualize(data: Result, size = (10, 10), grid = True, style = "-k", path: pathlib.Path = None):
