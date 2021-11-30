@@ -1,6 +1,6 @@
 # Random walks
 
-_Simplictic simulations of various types of random walks._
+_Simulations of various types of random walks._
 
 - Simple random walks
   - [x] Random walk on regular 1D lattice where you can step in any of the two directions `{↑, ↓}` with the same probability.
