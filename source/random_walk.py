@@ -25,7 +25,7 @@ State = typing.Tuple[Time, Space]
 Result = typing.Generator[State, None, None]
 
 
-__all__ = tuple(["simulate", "visulaize"])
+__all__ = tuple(["simulate", "visualize"])
 
 
 def simulate(steps: int, state: State) -> Result:
