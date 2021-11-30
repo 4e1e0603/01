@@ -130,7 +130,7 @@ def solution(trials = 500, repeats = 1000):
 
     Using Nw ≥ 500 random walks of n steps starting at the origin determine the mean Euclidean
     distance R after n steps together with its standard deviation. Plot the dependence of the mean
-    distance (including error bars given by the⌈ standard deviation) on the number of steps n.
+    distance (including error bars given by the standard deviation) on the number of steps n.
 
     Check that for all walks this dependence is of the form
 
@@ -151,7 +151,7 @@ def solution(trials = 500, repeats = 1000):
             _, space  = tuple(simulate(N, [0, (0, 0)]))[-1]
             R.append(distance(space))
 
-        # Calculate statistical mean⌈ and standard deviation.⌈
+        # Calculate statistical mean and standard deviation.
         result.append((N, st.mean(R), st.stdev(R)))
 
     with open('output/data.csv','w') as out:
