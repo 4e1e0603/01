@@ -47,6 +47,7 @@ def simulate(steps: int, state: State, restricted = False) -> Result:
     # Unpack the time and space coordinates.
     time, space = state[0], list(state[-1])
 
+    # The previous state for restrickted version.
     previous_increment, previous_dimension = 0, 0
 
     generate_increment_dimension = lambda: \
