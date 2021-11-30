@@ -55,8 +55,6 @@ Run the simulations.
                                                ^---------------- Dimension (1 | 2 | 3)
                                       ^------------------------- Number of steps per walk
 
-
-
 ### Fortran
 
 Work-in-progress: The Fortran version is almost finished, but data are not at the shape suitable for analysis.
