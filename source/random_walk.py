@@ -60,7 +60,7 @@ def simulate(steps: int, state: State, restricted = False) -> typing.Generator[R
     for time in range(steps):
         increment, dimension = generate_increment_dimension()
 
-        # When restricted random walk then generate unless the direction is not ooposite of previous.
+        # When random walk is restricted then generate random state unless the direction is not return.
         if restricted:
             while (previous_increment, previous_dimension) == (-increment, dimension):
                 increment, dimension = generate_increment_dimension()
