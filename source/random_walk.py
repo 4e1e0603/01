@@ -121,7 +121,7 @@ def visualize(data: Result, size = (10, 10), grid = True, style = "-k", path: pa
 
 def distance(coordinates: typing.Iterable[float]) -> float:
     """
-    Calculate the Euclidean distance (L2 norm).
+    Calculate the Euclidean distance (L2 norm) for the given coordinates.
     """
     return math.sqrt(sum(( (x ** 2) for x in coordinates)))
 
