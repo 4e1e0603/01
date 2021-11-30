@@ -41,7 +41,7 @@ def simulate(steps: int, state: State, restricted = False) -> Result:
     :return: The simulation result.
 
     """
-    if steps < 0:
+    if steps <= 0:
         raise ValueError("The steps value must be >= 0.")
 
     # Unpack the time and space coordinates.
