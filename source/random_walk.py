@@ -16,6 +16,8 @@ import seaborn as sb
 import matplotlib.pyplot as plt
 import statistics as st
 
+from seaborn.rcmod import reset_defaults
+
 sb.set()
 
 
@@ -28,7 +30,7 @@ Result = typing.Generator[State, None, None]
 __all__ = tuple(["simulate", "visualize"])
 
 
-def simulate(steps: int, state: State) -> Result:
+def simulate(steps: int, state: State, restricted = False) -> Result:
     """
     Simulate a random walk on 1/2/3-dimensional regular lattice.
 
@@ -45,11 +47,23 @@ def simulate(steps: int, state: State) -> Result:
     # Unpack the time and space coordinates.
     time, space = state[0], list(state[-1])
 
+    previous_increment, previous_dimension = 0, 0
+
+    generate_increment_dimension = lambda: \
+        ( random.choice([-1, 1]),
+          random.choice([_ for _ in range( 0, len(state[-1]))])
+        )
+
     # Update the time and space coordinates.
     for time in range(steps):
+        increment, dimension = generate_increment_dimension()
 
-        increment = random.choice([-1, 1])
-        dimension = random.choice([_ for _ in range( 0, len(state[-1]))])
+        # When restricted random walk then generate unless the direction is not ooposite of previous.
+        if restricted:
+            while (previous_increment, previous_dimension) == (-increment, dimension):
+                increment, dimension = generate_increment_dimension()
+
+        previous_increment, previous_dimension = increment, dimension
 
         time += 1; space[dimension] += increment
 
@@ -78,7 +92,7 @@ def visualize(data: Result, size = (10, 10), grid = True, style = "-k", path: pa
         case _:
             raise Exception("Unknown number of dimensions.")
 
-    title = f"Random walk {len(data[0][1]) - 1}D simulation with {len(data)} steps"
+    title = f"Random walk {len(data[0][1])}D simulation with {len(data)} steps"
 
     # TODO: Simplify and clean the 2D/3D plot.
     if len(data[0][1]) == 3:
@@ -108,7 +122,7 @@ def distance(coordinates: typing.Iterable[float]) -> float:
     return math.sqrt(sum(( (x ** 2) for x in coordinates)))
 
 
-def _example(trials = 500, repeats = 500, seed=123):
+def solution(trials = 500, repeats = 1000):
     """
     To simulate and analyze various types of random walks on the lattice in the plane (all steps are
     of the same length d = 1, but the direction is randomly chosen from a certain set of prescribed
@@ -120,17 +134,14 @@ def _example(trials = 500, repeats = 500, seed=123):
 
     Check that for all walks this dependence is of the form
 
-        R(n) = c n^α
+        R(n) = c n^α                                                            (1)
 
     where α ∈ (0, 1). Determine the constant c and the exponent α by the least-square fitting (you
     can use e.g. the built-in function fit in Gnuplot) of the logarithm of the equation (1)
 
-        ln(R) = ln c + α ln(n).
-
-    http://utf.mff.cuni.cz/vyuka/NTMF021/homeworks/HW_task_1.pdf
+        ln(R) = ln c + α ln(n).                                                 (2)
 
     """
-    random.seed(seed)
     result = []
 
     for N in range(1, trials):
@@ -140,37 +151,50 @@ def _example(trials = 500, repeats = 500, seed=123):
             _, space  = tuple(simulate(N, [0, (0, 0)]))[-1]
             R.append(distance(space))
 
-        result.append((f"{N}, {st.mean(R)}, {st.stdev(R)}"))
+        # Calculate statistical mean⌈ and standard deviation.⌈
+        result.append((N, st.mean(R), st.stdev(R)))
 
-    with open('output/data.csv','wb') as out:
+    with open('output/data.csv','w') as out:
         csv_out = csv.writer(out)
-        csv_out.writerow(['N','R'])
+        csv_out.writerow(['N','R','E'])
         for row in result:
             csv_out.writerow(row)
 
 
 if __name__ == "__main__":
+    try:
+        # Get command line arguments and parameters (will be improved).
+        N = int(sys.argv[1]) if len(sys.argv) > 1 else 1000      # Number of steps
+        D = int(sys.argv[2]) if len(sys.argv) > 2 else 1         # Dimension 1/2/3D
+        SEED = int(sys.argv[3]) if len(sys.argv) > 3 else 123321 # Random seed
+        EXAMPLE = sys.argv[4] if len(sys.argv) > 4 else True     # Run example
 
-    # Command line arguments.
-    N = int(sys.argv[1]) if len(sys.argv) > 1 else 1000   # steps
-    D = int(sys.argv[2]) if len(sys.argv) > 2 else 1      # 1D|2D
-    S = int(sys.argv[3]) if len(sys.argv) > 3 else 123321 # seed
+        RESTRICTED = False
+        MESSAGE = f"Random walk in {D}D simulation with {N} steps"
 
-    random.seed(S)
+        # Set the seed for reproduciblity.
+        random.seed(SEED)
 
-    message = f"Random walk in {D}D simulation with {N} steps"
+        # Show simualation overview and run.
+        if EXAMPLE:
+            TRIALS = 500; REPEATS = 1000
+            print(f"Run 2D example with statistic calculations: from 1 to {TRIALS} steps and {REPEATS} per steps.")
+            solution()
+        else:
+            print(f"{MESSAGE}\n{'-' * len(MESSAGE)}")
+            match D: # Run simulation for specified diemension.
+                case 1:
+                    data = simulate(steps = N, state = (0.0, [0.0]), restricted=RESTRICTED)
+                case 2:
+                    data = simulate(steps = N, state = (0.0, [0.0, 0.0]), restricted=RESTRICTED)
+                case 3:
+                    data = simulate(steps = N, state = (0.0, [0.0, 0.0, 0.0]), restricted=RESTRICTED)
+                case _:
+                    print(f"No random walk function for dimension {D} found.")
 
-    print(f"{message}\n{'-' * len(message)}")
+        visualize(data, path = pathlib.Path(f"output/RandomWalk{D}D-restricted={RESTRICTED}.png"))
+        sys.exit(0)
 
-    match D:
-        case 1:
-            data = simulate(steps = N, state = (0.0, [0.0]))
-        case 2:
-            data = simulate(steps = N, state = (0.0, [0.0, 0.0]))
-            # data = tuple(_example()) # Homework
-        case 3:
-            data = simulate(steps = N, state = (0.0, [0.0, 0.0, 0.0]))
-        case _:
-            print(f"No random walk function for dimension {D} found.")
-
-    visualize(data, path = pathlib.Path(f"output/RandomWalk{D}D.png"))
+    except Exception as ex:
+        print(ex.with_traceback())
+        sys.exit(1)
