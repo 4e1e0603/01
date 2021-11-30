@@ -126,7 +126,7 @@ def distance(coordinates: typing.Iterable[float]) -> float:
     return math.sqrt(sum(( (x ** 2) for x in coordinates)))
 
 
-def solution(trials = 500, repeats = 1000):
+def solution(trials = 500, repeats = 1000) -> None: # unpure function
     """
     To simulate and analyze various types of random walks on the lattice in the plane (all steps are
     of the same length d = 1, but the direction is randomly chosen from a certain set of prescribed
