@@ -46,24 +46,18 @@ module random_walk
         type(state)             :: updated
 
         if (random < 0.0 .or. random > 1.0) then
-            ! RAISE ERROR OR RETURN 0?
+            stop
         end if
 
         updated % t = current % t + 1
 
         if (random >= 0.0 .and. random < 0.25) then
             updated % x = (current % x) - 1
-        end if
-
-        if (random >= 0.25 .and. random < 0.5) then
+        else if (random >= 0.25 .and. random < 0.5) then
             updated % x = (current % x) + 1
-        end if
-
-        if (random >= 0.5 .and. random < 0.75) then
+        else if (random >= 0.5 .and. random < 0.75) then
             updated % y = (current % y) - 1
-        end if
-
-        if (random >= 0.75 .and. random < 1.0) then
+        else
             updated % y = (current % y) + 1
         end if
 
