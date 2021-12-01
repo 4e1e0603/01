@@ -65,6 +65,7 @@ def simulate(state: State, steps: int, restricted = False) -> typing.Generator[R
         if restricted:
             while (previous_increment, previous_dimension) == (-increment, dimension):
                 increment, dimension = generate_increment_dimension()
+                # time += 1 # Should we increment the time here?
 
         # Save the current state for the next cycle.
         previous_increment, previous_dimension = increment, dimension
@@ -120,7 +121,7 @@ def visualize(data: Result, size = (10, 10), grid = True, style = "-k", path: pa
     saveobj.savefig(str(path), format="png") if path is not None else plt.show()
 
 
-def solution(trials = 500, repeats = 1000) -> typing.Generator[tuple[float, float, float], None, None]:
+def solution(trials = 500, repeats = 1000, restricted=False) -> typing.Generator[tuple[float, float, float], None, None]:
     """
     Solution for problem, see the notebook `random_walk.ipynb`.
     """
@@ -128,7 +129,7 @@ def solution(trials = 500, repeats = 1000) -> typing.Generator[tuple[float, floa
         # For each N repeat e.g 1000-times (trials) and calculate a mean distance R.
         R = []
         for n in range(0, repeats + 1):
-            _, space  = tuple(simulate(steps=N, state=[0, (0, 0)]))[-1]
+            _, space  = tuple(simulate(steps=N, state=[0, (0, 0)], restricted=restricted))[-1]
             # Calculate the Euclidean distance (L2 norm) for the given coordinates.
             R.append(np.linalg.norm(space))
 
@@ -149,7 +150,7 @@ if __name__ == "__main__":
         SEED = int(sys.argv[3]) if len(sys.argv) > 3 else 123321 # Random seed
         EXAMPLE = sys.argv[4] if len(sys.argv) > 4 else True     # Run example
 
-        RESTRICTED = False
+        RESTRICTED = True
         MESSAGE = f"Random walk in {D}D simulation with {N} steps"
 
         # Set the seed for reproduciblity.
@@ -161,10 +162,10 @@ if __name__ == "__main__":
             REPEATS = 100  # cca 100
             print(f"Run 2D example with statistics: from 1 to {TRIALS} steps and {REPEATS} repeats per steps.")
 
-            result = solution(trials=TRIALS, repeats=REPEATS)
+            result = solution(trials=TRIALS, repeats=REPEATS, restricted=RESTRICTED)
 
             # TODO This should be some function.
-            with open('output/data.csv','w') as out:
+            with open(f"output/data-{'restricted' if RESTRICTED else 'simple'}.csv",'w') as out:
                 csv_out = csv.writer(out)
                 csv_out.writerow(['N','R','E'])
                 for row in result:

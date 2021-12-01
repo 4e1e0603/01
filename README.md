@@ -33,8 +33,13 @@ _Simulations of various types of random walks._
 ### Random walk statistics
 
 <p float="left">
-<img src="output/RandomWalk2DStatistics1.png" width="49.5%"/>
-<img src="output/RandomWalk2DStatistics2.png" width="49.5%"/>
+<img src="output/RandomWalk2DStatisticsSimple1.png" width="49.5%"/>
+<img src="output/RandomWalk2DStatisticsSimple2.png" width="49.5%"/>
+</p>
+
+<p float="left">
+<img src="output/RandomWalk2DStatisticsRestricted1.png" width="49.5%"/>
+<img src="output/RandomWalk2DStatisticsRestricted2.png" width="49.5%"/>
 </p>
 
 ## Build and run
