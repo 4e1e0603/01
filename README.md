@@ -22,11 +22,19 @@ See the examples:
 
 ### Simple random walks
 
-![Random walk 1D](output/RandomWalk1D-restricted=False.png "Random walk 1D") ![Random walk 2D](output/RandomWalk2D-restricted=False.png "Random walk 2D") ![Random walk 2D](output/RandomWalk3D-restricted=False.png "Random walk 3D")
+<p float="left">
+![Random walk 1D](output/RandomWalk1D-restricted=False.png "Random walk 1D")
+![Random walk 2D](output/RandomWalk2D-restricted=False.png "Random walk 2D")
+![Random walk 2D](output/RandomWalk3D-restricted=False.png "Random walk 3D")
+</p>
 
 ### Restricted random walks
 
-![Random walk 1D Restricted](output/RandomWalk1D-restricted=True.png "Random walk 1D Restricted") ![Random walk 2D Restricted](output/RandomWalk2D-restricted=True.png "Random walk 2D Restricted") ![Random walk 2D Restricted](output/RandomWalk3D-restricted=True.png "Random walk 3D Restricted")
+<p float="left">
+![Random walk 1D Restricted](output/RandomWalk1D-restricted=True.png "Random walk 1D Restricted")
+![Random walk 2D Restricted](output/RandomWalk2D-restricted=True.png "Random walk 2D Restricted")
+![Random walk 2D Restricted](output/RandomWalk3D-restricted=True.png "Random walk 3D Restricted")
+</p>
 
 ## Build and run
 
