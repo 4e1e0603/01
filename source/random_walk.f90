@@ -1,8 +1,7 @@
 ! -*- coding: utf-8 -*-
 
-!! Random walk 2D simulation with discrete time and space.
 module random_walk
-
+    !! Random walk 2D simulation with discrete time and space.
     implicit none
 
     private
@@ -29,8 +28,6 @@ module random_walk
         !! @param random  The random number.
         !! @param current The current state.
         !! @return output The updated state.
-        !!
-        implicit none
 
         ! Work-in-progress: Update-without-return, we have to provide previous move.
         ! select case (forbidden)
@@ -64,20 +61,18 @@ module random_walk
     end function
 
     pure function simulate(trials, steps, randoms) result(outputs)
-        !! Realize 2-dimensional simple random walk on ℤ for the given number of steps and trials.
+        !! Simulate 2D random walk on ℤ for the given number of trials and steps.
         !!
         !! @param steps   The number of random walk steps.
         !! @param trials  The number of random walk trials.
         !! @param randoms The array with random numbers of size = (trials, steps)
         !! @return        The coordinates x and y.
-        !!
-        implicit none
 
         integer, intent(in) :: steps, trials
-        real, intent(in) :: randoms(trials, steps)
-        real, dimension(:,:,:), allocatable :: outputs
-        type(state) :: current
-        integer :: trial, step
+        real, intent(in)    :: randoms(trials, steps)
+        real, allocatable   :: outputs(:,:,:)
+        integer             :: trial, step
+        type(state)         :: current
 
         allocate(outputs(1:trials, 1:steps, 1:3))
 
@@ -93,7 +88,6 @@ module random_walk
                 outputs(trial, step, 1) = current % t
                 outputs(trial, step, 2) = current % x
                 outputs(trial, step, 3) = current % y
-                ! print *, current
             end do
 
         end do
@@ -101,25 +95,16 @@ module random_walk
     end function
 
     pure function metrics(positions) result(outputs)
-        !! Compute the Euclidean distance and standard deviation.
+        !! Compute the average distance from origin and standard deviation.
+        !!
         !! @param positons The array of `x`, `y` coordinates.
         !! @return The array with Euclidean distance and standard deviation.
-        implicit none
 
         real, intent(in) :: positions(:,:)
         real, dimension(:,:), allocatable :: outputs
-        real :: distance_average
-        integer :: i
 
         allocate(outputs(1:size(positions, 1), 1:2)) ! 1=distance, 1=std_deviation
-
-        do i = 1, size(positions)
-            outputs(i, 1) = sqrt( positions(i, 1) ** 2 + positions(i, 2) ** 2)
-        end do
-
-        distance_average = sum(positions(:, 1)) / size(positions, 1)
-
-        outputs(:, 2) = sqrt(  sum(((positions(:, 1) - distance_average)) ** 2) / size(positions, 1))
+        ! TODO
 
     end function
 
