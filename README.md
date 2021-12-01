@@ -22,15 +22,11 @@ See the examples:
 
 ### Simple random walks
 
-![Random walk 1D](output/RandomWalk1D-restricted=False.png "Random walk 1D")
-![Random walk 2D](output/RandomWalk2D-restricted=False.png "Random walk 2D")
-![Random walk 2D](output/RandomWalk3D-restricted=False.png "Random walk 3D")
+![Random walk 1D](output/RandomWalk1D-restricted=False.png "Random walk 1D") ![Random walk 2D](output/RandomWalk2D-restricted=False.png "Random walk 2D") ![Random walk 2D](output/RandomWalk3D-restricted=False.png "Random walk 3D")
 
 ### Restricted random walks
 
-![Random walk 1D Restricted](output/RandomWalk1D-restricted=True.png "Random walk 1D Restricted")
-![Random walk 2D Restricted](output/RandomWalk2D-restricted=True.png "Random walk 2D Restricted")
-![Random walk 2D Restricted](output/RandomWalk3D-restricted=True.png "Random walk 3D Restricted")
+![Random walk 1D Restricted](output/RandomWalk1D-restricted=True.png "Random walk 1D Restricted") ![Random walk 2D Restricted](output/RandomWalk2D-restricted=True.png "Random walk 2D Restricted") ![Random walk 2D Restricted](output/RandomWalk3D-restricted=True.png "Random walk 3D Restricted")
 
 ## Build and run
 
@@ -54,6 +50,15 @@ Run the simulations.
                                                  ^-------------- Random seed
                                                ^---------------- Dimension (1 | 2 | 3)
                                       ^------------------------- Number of steps per walk
+
+The running simulation looks like this:
+
+  Run 2D example with statistics: from 1 to 500 steps and 100 repeats per steps.
+  trial = 218, walk = 990
+
+&hellip; after succes run:
+
+  ---SUCCESS---
 
 ### Fortran
 
