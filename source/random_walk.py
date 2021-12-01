@@ -30,7 +30,7 @@ Result = typing.Generator[State, None, None]
 __all__ = tuple(["simulate", "visualize"])
 
 
-def simulate(steps: int, state: State, restricted = False) -> typing.Generator[Result, None, None]:
+def simulate(state: State, steps: int, restricted = False) -> typing.Generator[Result, None, None]:
     """
     Simulate a random walk on 1/2/3-dimensional regular lattice.
 
@@ -122,50 +122,34 @@ def visualize(data: Result, size = (10, 10), grid = True, style = "-k", path: pa
 def distance(coordinates: typing.Iterable[float]) -> float:
     """
     Calculate the Euclidean distance (L2 norm) for the given coordinates.
+
+    See https://stackoverflow.com/questions/1401712/how-can-the-euclidean-distance-be-calculated-with-numpy
+    how to calculate distnace with library functions.
     """
     return math.sqrt(sum(( (x ** 2) for x in coordinates)))
 
 
-def solution(trials = 500, repeats = 1000) -> None: # unpure function
+def solution(trials = 500, repeats = 1000) -> typing.Generator[tuple[float, float, float], None, None]:
     """
-    To simulate and analyze various types of random walks on the lattice in the plane (all steps are
-    of the same length d = 1, but the direction is randomly chosen from a certain set of prescribed
-    possibilities).
-
-    Using Nw ≥ 500 random walks of n steps starting at the origin determine the mean Euclidean
-    distance R after n steps together with its standard deviation. Plot the dependence of the mean
-    distance (including error bars given by the standard deviation) on the number of steps n.
-
-    Check that for all walks this dependence is of the form
-
-        R(n) = c n^α                                                            (1)
-
-    where α ∈ (0, 1). Determine the constant c and the exponent α by the least-square fitting (you
-    can use e.g. the built-in function fit in Gnuplot) of the logarithm of the equation (1)
-
-        ln(R) = ln c + α ln(n).                                                 (2)
-
+    Solution for problem, see the notebook `random_walk.ipynb`.
     """
-    result = []
-
-    for N in range(1, trials):
+    for N in range(1, trials): # This loop can be parallelized, but how?
         # For each N repeat e.g 1000-times (trials) and calculate a mean distance R.
         R = []
         for n in range(0, repeats + 1):
-            _, space  = tuple(simulate(N, [0, (0, 0)]))[-1]
+            _, space  = tuple(simulate(steps=N, state=[0, (0, 0)]))[-1]
             R.append(distance(space))
 
-        # Calculate statistical mean and standard deviation.
-        result.append((N, st.mean(R), st.stdev(R)))
+            print(f"trial = {N}, walk = {n}", end="\r") # DEBUGGING: Replace by logging!
 
-    with open('output/data.csv','w') as out:
-        csv_out = csv.writer(out)
-        csv_out.writerow(['N','R','E'])
-        for row in result:
-            csv_out.writerow(row)
+        # Calculate statistical mean and standard deviation.
+        yield (N, st.mean(R), st.stdev(R))
 
 
 if __name__ == "__main__":
+
+    # TODO: Make cleaner command line interface and default parameters.
+
     try:
         # Get command line arguments and parameters (will be improved).
         N = int(sys.argv[1]) if len(sys.argv) > 1 else 1000      # Number of steps
@@ -181,9 +165,20 @@ if __name__ == "__main__":
 
         # Show simualation overview and run.
         if EXAMPLE:
-            TRIALS = 500; REPEATS = 1000
-            print(f"Run 2D example with statistic calculations: from 1 to {TRIALS} steps and {REPEATS} per steps.")
-            solution()
+            TRIALS = 500   # cca 500
+            REPEATS = 100  # cca 100
+            print(f"Run 2D example with statistics: from 1 to {TRIALS} steps and {REPEATS} repeats per steps.")
+
+            result = solution(trials=TRIALS, repeats=REPEATS)
+
+            # TODO This should be some function.
+            with open('output/data.csv','w') as out:
+                csv_out = csv.writer(out)
+                csv_out.writerow(['N','R','E'])
+                for row in result:
+                    csv_out.writerow(row)
+
+            print(f"---SUCCESS---{20 * ' '}")
         else:
             print(f"{MESSAGE}\n{'-' * len(MESSAGE)}")
             match D: # Run simulation for specified diemension.
@@ -195,10 +190,13 @@ if __name__ == "__main__":
                     data = simulate(steps = N, state = (0.0, [0.0, 0.0, 0.0]), restricted=RESTRICTED)
                 case _:
                     print(f"No random walk function for dimension {D} found.")
+            # Show or save plots.
+            visualize(data, path = pathlib.Path(f"output/RandomWalk{D}D-restricted={RESTRICTED}.png"))
+            print(f"---SUCCESS---{20 * ' '}")
 
-        visualize(data, path = pathlib.Path(f"output/RandomWalk{D}D-restricted={RESTRICTED}.png"))
         sys.exit(0)
 
     except Exception as ex:
-        print(ex.with_traceback())
+        print(ex)
+        print("---FAILURE---")
         sys.exit(1)

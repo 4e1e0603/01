@@ -36,6 +36,14 @@ See the examples:
 <img src="output/RandomWalk3D-restricted=True.png" width="30.333%"/>
 </p>
 
+## Random walk statistics
+
+<p float="left">
+<img src="output/RandomWalk2DStatistics1.png" width="30.333%"/>
+<img src="output/RandomWalk2DStatistics2.png" width="30.333%"/>
+<img src="output/RandomWalk2DStatistics3.png" width="30.333%"/>
+</p>
+
 ## Build and run
 
 All outputs such as data and images are located in `output` folder.
