@@ -36,7 +36,7 @@ See the examples:
 <img src="output/RandomWalk3D-restricted=True.png" width="30.333%"/>
 </p>
 
-## Random walk statistics
+### Random walk statistics
 
 <p float="left">
 <img src="output/RandomWalk2DStatistics1.png" width="49.5%"/>
