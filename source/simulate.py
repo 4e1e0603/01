@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import sys
 import pathlib
 import subprocess
+import sys
 
-data = pathlib.Path("./data")
+data = pathlib.Path("./output")
 
 
 if __name__ == "__main__":
@@ -14,8 +14,15 @@ if __name__ == "__main__":
 
     for step in range(10, STEPS, DELTA):
 
-        with open(data / f"random_walk_(steps={step}).dat", encoding="utf-8", mode="w") as _file:
-            subprocess.run(''.join(f"random_walk_main.exe 123 {step + DELTA} 1"), stdout=_file, shell=True, check=True)
+        with open(
+            data / f"random_walk_(steps={step}).dat", encoding="utf-8", mode="w"
+        ) as _file:
+            subprocess.run(
+                "".join(f"random_walk_main.exe 123 {step + DELTA} 1"),
+                stdout=_file,
+                shell=True,
+                check=True,
+            )
             print(f"PROCESED {step} FILES\r", end="")
 
     print(f"PROCESED {step + DELTA} FILES\r")

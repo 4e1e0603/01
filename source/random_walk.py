@@ -4,19 +4,18 @@
 This module contains a functions for random walk simulations.
 """
 
-import sys
 import csv
 import math
-import random
-import typing
 import pathlib
+import random
+import statistics as st
+import sys
+import typing
 
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sb
-import matplotlib.pyplot as plt
-import statistics as st
-
 from seaborn.rcmod import reset_defaults
 
 sb.set()
@@ -143,6 +142,7 @@ if __name__ == "__main__":
 
     # TODO >>> Make cleaner command line interface and default parameters.
     import argparse
+
     # <<<<
 
     try:

@@ -6,8 +6,8 @@ module random_walk
 
     private
 
-    !! The state on 2-dimensional regular lattice.
     type, public :: state
+        !! The state on 2-dimensional regular lattice.
         real :: t = 0.0; ! time
         real :: x = 0.0; ! space (x)
         real :: y = 0.0; ! space (y)

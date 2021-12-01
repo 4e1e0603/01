@@ -78,7 +78,6 @@ program random_walk_test
         ! "GIVEN ... WHEN ... THEN ..."
     end block
 
-
     block ! 1D random walk
         ! state1 % t = 0.0; state1 % x = 0.0
 
