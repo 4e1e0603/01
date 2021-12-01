@@ -23,9 +23,9 @@ See the examples:
 ### Simple random walks
 
 <p float="left">
-<img src="output/RandomWalk1D-restricted=False.png"/>
-<img src="output/RandomWalk2D-restricted=False.png"/>
-<img src="output/RandomWalk3D-restricted=False.png"/>
+<img src="output/RandomWalk1D-restricted=False.png" width="30%"/>
+<img src="output/RandomWalk2D-restricted=False.png" width="30%"/>
+<img src="output/RandomWalk3D-restricted=False.png" width="30%"/>
 </p>
 
 ### Restricted random walks
