@@ -54,7 +54,7 @@ def simulate(state: State, steps: int, restricted = False) -> typing.Generator[R
     # The anonymus function to generate random state.
     generate_increment_dimension = lambda: \
         ( random.choice([-1, 1]),
-          random.choice([_ for _ in range( 0, len(state[-1]))])
+          random.choice([_ for _ in range( 0, len(space))])
         )
 
     # Update the time and space coordinates.
@@ -133,7 +133,7 @@ def solution(trials = 500, repeats = 1000, restricted=False) -> typing.Generator
             # Calculate the Euclidean distance (L2 norm) for the given coordinates.
             R.append(np.linalg.norm(space))
 
-            print(f"trial = {N}, walk = {n}", end="\r") # DEBUGGING: Replace by logging!
+            print(f"trial = {N}/{trials}, walk = {n}/{repeats}", end="\r") # DEBUGGING: Replace by logging!
 
         # Calculate statistical mean and standard deviation.
         yield (N, st.mean(R), st.stdev(R))
@@ -141,7 +141,9 @@ def solution(trials = 500, repeats = 1000, restricted=False) -> typing.Generator
 
 if __name__ == "__main__":
 
-    # TODO: Make cleaner command line interface and default parameters.
+    # TODO >>> Make cleaner command line interface and default parameters.
+    import argparse
+    # <<<<
 
     try:
         # Get command line arguments and parameters (will be improved).
@@ -150,7 +152,7 @@ if __name__ == "__main__":
         SEED = int(sys.argv[3]) if len(sys.argv) > 3 else 123321 # Random seed
         EXAMPLE = sys.argv[4] if len(sys.argv) > 4 else True     # Run example
 
-        RESTRICTED = True
+        RESTRICTED = False
         MESSAGE = f"Random walk in {D}D simulation with {N} steps"
 
         # Set the seed for reproduciblity.
@@ -158,8 +160,8 @@ if __name__ == "__main__":
 
         # Show simualation overview and run.
         if EXAMPLE:
-            TRIALS = 500   # cca 500
-            REPEATS = 100  # cca 100
+            TRIALS = 500     # cca 500
+            REPEATS = 10000  # cca 100
             print(f"Run 2D example with statistics: from 1 to {TRIALS} steps and {REPEATS} repeats per steps.")
 
             result = solution(trials=TRIALS, repeats=REPEATS, restricted=RESTRICTED)
