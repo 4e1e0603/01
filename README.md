@@ -39,9 +39,8 @@ See the examples:
 ## Random walk statistics
 
 <p float="left">
-<img src="output/RandomWalk2DStatistics1.png" width="30.333%"/>
-<img src="output/RandomWalk2DStatistics2.png" width="30.333%"/>
-<img src="output/RandomWalk2DStatistics3.png" width="30.333%"/>
+<img src="output/RandomWalk2DStatistics1.png" width="49.5%"/>
+<img src="output/RandomWalk2DStatistics2.png" width="49.5%"/>
 </p>
 
 ## Build and run

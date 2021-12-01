@@ -11,6 +11,7 @@ import random
 import typing
 import pathlib
 
+import numpy as np
 import pandas as pd
 import seaborn as sb
 import matplotlib.pyplot as plt
@@ -119,16 +120,6 @@ def visualize(data: Result, size = (10, 10), grid = True, style = "-k", path: pa
     saveobj.savefig(str(path), format="png") if path is not None else plt.show()
 
 
-def distance(coordinates: typing.Iterable[float]) -> float:
-    """
-    Calculate the Euclidean distance (L2 norm) for the given coordinates.
-
-    See https://stackoverflow.com/questions/1401712/how-can-the-euclidean-distance-be-calculated-with-numpy
-    how to calculate distnace with library functions.
-    """
-    return math.sqrt(sum(( (x ** 2) for x in coordinates)))
-
-
 def solution(trials = 500, repeats = 1000) -> typing.Generator[tuple[float, float, float], None, None]:
     """
     Solution for problem, see the notebook `random_walk.ipynb`.
@@ -138,7 +129,8 @@ def solution(trials = 500, repeats = 1000) -> typing.Generator[tuple[float, floa
         R = []
         for n in range(0, repeats + 1):
             _, space  = tuple(simulate(steps=N, state=[0, (0, 0)]))[-1]
-            R.append(distance(space))
+            # Calculate the Euclidean distance (L2 norm) for the given coordinates.
+            R.append(np.linalg.norm(space))
 
             print(f"trial = {N}, walk = {n}", end="\r") # DEBUGGING: Replace by logging!
 
