@@ -23,17 +23,17 @@ See the examples:
 ### Simple random walks
 
 <p float="left">
-![Random walk 1D](output/RandomWalk1D-restricted=False.png "Random walk 1D")
-![Random walk 2D](output/RandomWalk2D-restricted=False.png "Random walk 2D")
-![Random walk 2D](output/RandomWalk3D-restricted=False.png "Random walk 3D")
+<img src="output/RandomWalk1D-restricted=False.png"/>
+<img src="output/RandomWalk2D-restricted=False.png"/>
+<img src="output/RandomWalk3D-restricted=False.png"/>
 </p>
 
 ### Restricted random walks
 
 <p float="left">
-![Random walk 1D Restricted](output/RandomWalk1D-restricted=True.png "Random walk 1D Restricted")
-![Random walk 2D Restricted](output/RandomWalk2D-restricted=True.png "Random walk 2D Restricted")
-![Random walk 2D Restricted](output/RandomWalk3D-restricted=True.png "Random walk 3D Restricted")
+<img src="output/RandomWalk1D-restricted=True.png"/>
+<img src="output/RandomWalk2D-restricted=True.png"/>
+<img src="output/RandomWalk3D-restricted=True.png"/>
 </p>
 
 ## Build and run
