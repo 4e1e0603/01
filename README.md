@@ -47,26 +47,26 @@ You need Python version 3.10+.
 
 Create a virtual environment.
 
-      python -3.10 -m venv .venv
-      .venv\scripts\activate
-      pip install matplotlib, seaborn, numpy, pandas
+    python -3.10 -m venv .venv
+    .venv\scripts\activate
+    pip install matplotlib, seaborn, numpy, pandas
 
 Run the simulations.
 
-      python .\source\random_walk.py 1_000_000 3 123321 True # 1D simulation with 100_000 steps
-                                                         ^------ Run solution (example) (True | False)
-                                                 ^-------------- Random seed
-                                               ^---------------- Dimension (1 | 2 | 3)
-                                      ^------------------------- Number of steps per walk
+    python .\source\random_walk.py 1_000_000 3 123321 True # 1D simulation with 100_000 steps
+                                                       ^------ Run solution (example) (True | False)
+                                               ^-------------- Random seed
+                                             ^---------------- Dimension (1 | 2 | 3)
+                                    ^------------------------- Number of steps per walk
 
 The running simulation looks like this:
 
-  Run 2D example with statistics: from 1 to 500 steps and 100 repeats per steps.
-  trial = 218, walk = 990
+    Run 2D example with statistics: from 1 to 500 steps and 100 repeats per steps.
+    trial = 218, walk = 990
 
 &hellip; after succes run:
 
-  ---SUCCESS---
+    ---SUCCESS---
 
 ### Fortran
 
