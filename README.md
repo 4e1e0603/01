@@ -12,13 +12,7 @@ _Simulations of various types of random walks._
       the first step is in any direction.
   - [ ] Random walk on the square lattice without crossing i.e. self-avoiding random walk.
 
-See the examples:
-
-- [random_walk.py module](source/random_walk.py)
-- [random_walk.ipynb notebook](source/random_walk.ipynb)
-- [random_walk.f90 module](source/random_walk.f90)
-- [random_walk_main.f90 program](source/random_walk_main.f90)
-- [random_walk_main.f90 test](source/random_walk_test.f90)
+## Examples
 
 ### Simple random walks
 
@@ -47,6 +41,14 @@ See the examples:
 
 All outputs such as data and images are located in `output` folder.
 The presented images were produced by Python implementation.
+
+See the source files:
+
+- [random_walk.py module](source/random_walk.py)
+- [random_walk.ipynb notebook](source/random_walk.ipynb)
+- [random_walk.f90 module](source/random_walk.f90)
+- [random_walk_main.f90 program](source/random_walk_main.f90)
+- [random_walk_main.f90 test](source/random_walk_test.f90)
 
 ### Python
 
