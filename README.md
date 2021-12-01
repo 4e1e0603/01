@@ -23,17 +23,17 @@ See the examples:
 ### Simple random walks
 
 <p float="left">
-<img src="output/RandomWalk1D-restricted=False.png" width="30%"/>
-<img src="output/RandomWalk2D-restricted=False.png" width="30%"/>
-<img src="output/RandomWalk3D-restricted=False.png" width="30%"/>
+<img src="output/RandomWalk1D-restricted=False.png" width="30.333%"/>
+<img src="output/RandomWalk2D-restricted=False.png" width="30.333%"/>
+<img src="output/RandomWalk3D-restricted=False.png" width="30.333%"/>
 </p>
 
 ### Restricted random walks
 
 <p float="left">
-<img src="output/RandomWalk1D-restricted=True.png"/>
-<img src="output/RandomWalk2D-restricted=True.png"/>
-<img src="output/RandomWalk3D-restricted=True.png"/>
+<img src="output/RandomWalk1D-restricted=True.png" width="30.333%"/>
+<img src="output/RandomWalk2D-restricted=True.png" width="30.333%"/>
+<img src="output/RandomWalk3D-restricted=True.png" width="30.333%"/>
 </p>
 
 ## Build and run
