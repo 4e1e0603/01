@@ -13,7 +13,7 @@ module random_walk
         real :: y = 0.0; ! space (y)
     end type
 
-    public :: update, metrics, simulate
+    public :: update, simulate, statistics
 
     contains
 
@@ -94,7 +94,7 @@ module random_walk
         ! $OMP END PARALLEL DO
     end function
 
-    pure function metrics(positions) result(outputs)
+    pure function statistics(positions) result(outputs)
         !! Compute the average distance from origin and standard deviation.
         !!
         !! @param positons The array of `x`, `y` coordinates.
