@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 Result = tuple[float, float, float]
 
 
-def simulate(trials, repeats, restriction = False, check_restrictions = False) -> Generator[Result, None, None]:
+def simulate(trials, repeats, restriction = False) -> Generator[Result, None, None]:
 
     """
     Transition table for restricted moves. Steps with * are not allowed
@@ -48,15 +48,6 @@ def simulate(trials, repeats, restriction = False, check_restrictions = False) -
                 nums[nums == 2] = 3
                 # Cumulative sum to calculate steps with restriction. (+/- 2 steps are restricted).
                 steps = np.mod(np.cumsum(nums), 4)
-
-                # Check steps according to transition table
-                if check_restrictions:
-                    for F, T in [(0, 2), (1, 3), (2, 0), (3, 1)]:
-                        nxt = np.where(steps == F)[0] + 1
-                        nxt = nxt[nxt < len(steps)]
-                        if np.any(np.where(steps[nxt] == T)[0]):
-                            raise ValueError(f'Restricted move ({F}, {T}) found!')
-
                 walk = directions[steps].cumsum()
                 dst.append(abs(walk[-1]))
         else:
