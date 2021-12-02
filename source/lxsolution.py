@@ -5,9 +5,24 @@ import numpy as np
 from scipy import optimize, stats
 from tqdm import tqdm
 
+# Transition table for restricted moves. Steps with * are not allowed
+# rows and columns are indexes to direction array, so e.g star with
+# F=0 and T=2 means that move directions[2] cannot follow move direction[0],
+# i.e complex(0, -1) cannot ba just after complex(0, 1) etc...
+#
+#  T 0 1 2 3
+#  F+-------+
+#  0| | |*| |
+#  1| | | |*|
+#  2|*| | | |
+#  3| |*| | |
+#   +-------+
+
+
 TRIALS = 500  # cca 500
 REPEATS = 1000  # cca 100
 RESTRICTION = True
+CHECK_RESTRICTIONS = True
 
 directions = np.array([complex(0, 1), complex(1, 0), complex(0, -1), complex(-1, 0)])
 
@@ -31,6 +46,13 @@ for N in tqdm(range(1, TRIALS + 1), desc="Calculating trials..."):
             nums[nums == 2] = 3
             # cumulative sum to calculate steps with restriction. (+/- 2 steps are restricted)
             steps = np.mod(np.cumsum(nums), 4)
+            # Check steps according to transition table
+            if CHECK_RESTRICTIONS:
+                for F, T in [(0, 2), (1, 3), (2, 0), (3, 1)]:
+                    nxt = np.where(steps == F)[0] + 1
+                    nxt = nxt[nxt < len(steps)]
+                    if np.any(np.where(steps[nxt] == T)[0]):
+                        raise ValueError(f'Restricted move ({F}, {T}) found !!!')
             walk = directions[steps].cumsum()
             dst.append(abs(walk[-1]))
     else:
