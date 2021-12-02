@@ -10,7 +10,10 @@ from scipy import optimize, stats
 from tqdm import tqdm
 
 
-def simulate(trials, repeats, restriction = False, check_restrictions = False) -> Generator[float, None, None]:
+Result = tuple[float, float, float]
+
+
+def simulate(trials, repeats, restriction = False, check_restrictions = False) -> Generator[Result, None, None]:
     # Transition table for restricted moves. Steps with * are not allowed
     # rows and columns are indexes to direction array, so e.g star with
     # F=0 and T=2 means that move directions[2] cannot follow move direction[0],
@@ -62,7 +65,7 @@ def simulate(trials, repeats, restriction = False, check_restrictions = False) -
         yield (N, np.mean(dst), np.std(dst))
 
 
-def visualize(results):
+def visualize(results) -> None:
 
     steps, distance, error = np.array(results).T
 
