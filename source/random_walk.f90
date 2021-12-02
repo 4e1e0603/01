@@ -6,8 +6,8 @@ module random_walk
 
     private
 
+    !! The state on 2-dimensional regular lattice.
     type, public :: state
-        !! The state on 2-dimensional regular lattice.
         real :: t = 0.0; ! time
         real :: x = 0.0; ! space (x)
         real :: y = 0.0; ! space (y)
@@ -48,11 +48,11 @@ module random_walk
 
         updated % t = current % t + 1
 
-        if (random >= 0.0 .and. random < 0.25) then
+        if (random < 0.25) then
             updated % x = (current % x) - 1
-        else if (random >= 0.25 .and. random < 0.5) then
+        else if (random < 0.5) then
             updated % x = (current % x) + 1
-        else if (random >= 0.5 .and. random < 0.75) then
+        else if (random < 0.75) then
             updated % y = (current % y) - 1
         else
             updated % y = (current % y) + 1

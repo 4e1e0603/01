@@ -1,31 +1,34 @@
 # -*- coding: utf-8 -*-
 
-from re import T
 import time
+from re import T
 from typing import Generator
 
-import matplotlib.pyplot as plt
+from tqdm import tqdm
 import numpy as np
 from scipy import optimize, stats
-from tqdm import tqdm
+import matplotlib.pyplot as plt
 
 
 Result = tuple[float, float, float]
 
 
 def simulate(trials, repeats, restriction = False, check_restrictions = False) -> Generator[Result, None, None]:
-    # Transition table for restricted moves. Steps with * are not allowed
-    # rows and columns are indexes to direction array, so e.g star with
-    # F=0 and T=2 means that move directions[2] cannot follow move direction[0],
-    # i.e complex(0, -1) cannot ba just after complex(0, 1) etc...
-    #
-    #  T 0 1 2 3
-    #  F+-------+
-    #  0| | |*| |
-    #  1| | | |*|
-    #  2|*| | | |
-    #  3| |*| | |
-    #   +-------+
+
+    """
+    Transition table for restricted moves. Steps with * are not allowed
+    rows and columns are indexes to direction array, so e.g star with
+    F=0 and T=2 means that move directions[2] cannot follow move direction[0],
+    i.e complex(0, -1) cannot ba just after complex(0, 1) etc...
+
+        T 0 1 2 3
+        F+-------+
+        0| | |*| |
+        1| | | |*|
+        2|*| | | |
+        3| |*| | |
+        +-------+
+    """
 
     directions = np.array([complex(0, 1), complex(1, 0), complex(0, -1), complex(-1, 0)])
 
@@ -52,7 +55,7 @@ def simulate(trials, repeats, restriction = False, check_restrictions = False) -
                         nxt = np.where(steps == F)[0] + 1
                         nxt = nxt[nxt < len(steps)]
                         if np.any(np.where(steps[nxt] == T)[0]):
-                            raise ValueError(f'Restricted move ({F}, {T}) found !!!')
+                            raise ValueError(f'Restricted move ({F}, {T}) found!')
 
                 walk = directions[steps].cumsum()
                 dst.append(abs(walk[-1]))
