@@ -64,7 +64,6 @@ def simulate(state: State, steps: int, restricted = False) -> typing.Generator[R
         if restricted:
             while (previous_increment, previous_dimension) == (-increment, dimension):
                 increment, dimension = generate_increment_dimension()
-                # time += 1 # Should we increment the time here?
 
         # Save the current state for the next cycle.
         previous_increment, previous_dimension = increment, dimension
