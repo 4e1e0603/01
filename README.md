@@ -61,17 +61,24 @@ You need Python version 3.10+.
 
 Create a virtual environment.
 
-    python -3.10 -m venv .venv
-    .venv\scripts\activate
-    pip install matplotlib, seaborn, numpy, pandas
+```powershell
+py -3.10 -m venv .venv
+.venv\scripts\activate
+pip install matplotlib, seaborn, numpy, pandas
+```
+
+Note: On Ubuntu may need to install `venv` module as `sudo apt-get install python-venv`. And invoke the 
+module as `python3 -m venv .venv` (there is no `py.exe` as on Windows. Please read the official [documentation](https://docs.python.org/3/tutorial/venv.html).
 
 Run the simulations.
 
-    python .\source\random_walk.py 1_000_000 3 123321 True # 1D simulation with 100_000 steps
-                                                       ^------ Run solution (example) (True | False)
-                                               ^-------------- Random seed
-                                             ^---------------- Dimension (1 | 2 | 3)
-                                    ^------------------------- Number of steps per walk
+```powershell
+python .\source\random_walk.py 1_000_000 3 123321 True # 1D simulation with 100_000 steps
+                                                   ^------ Run solution (example) (True | False)
+                                           ^-------------- Random seed
+                                         ^---------------- Dimension (1 | 2 | 3)
+                                ^------------------------- Number of steps per walk
+```
 
 The running simulation looks like this:
 
