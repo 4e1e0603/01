@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+The faster `numpy` implementation of 2D random walk.
+"""
+
 import time
 from re import T
 from typing import Generator
@@ -90,7 +94,7 @@ if __name__ == "__main__":
     print(f"Random walk 2D example (restrictions={RESTRICTION}: from 1 to {TRIALS} steps and {REPEATS} repeats per step.")
 
     t0 = time.time()
-    results =[_ for _ in tqdm(simulate(TRIALS, REPEATS, RESTRICTION, CHECK_RESTRICTIONS), desc="Calculating trials")]
+    results = [_ for _ in tqdm(simulate(TRIALS, REPEATS, RESTRICTION), desc="Calculating trials")]
     dt = time.time() - t0
 
     print(f"Total time of execution: {dt:.2g} seconds.")
