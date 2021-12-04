@@ -94,6 +94,10 @@ module random_walk
         ! $OMP END PARALLEL DO
     end function
 
+    ! pure function replicate()
+      !! See the replicat function in R language.
+    ! end
+
     pure function statistics(positions) result(outputs)
         !! Compute the average distance from origin and standard deviation.
         !!

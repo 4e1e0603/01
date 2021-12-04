@@ -27,7 +27,7 @@ State = typing.Tuple[Time, Space]
 Result = typing.Generator[State, None, None]
 
 
-__all__ = tuple(["simulate", "visualize"])
+__all__ = tuple(["simulate", "replicate", "visualize"])
 
 
 def simulate(state: State, steps: int, restricted = False) -> typing.Generator[Result, None, None]:
@@ -119,9 +119,9 @@ def visualize(data: Result, size = (10, 10), grid = True, style = "-k", path: pa
     saveobj.savefig(str(path), format="png") if path is not None else plt.show()
 
 
-def solution(trials = 500, repeats = 1000, restricted=False) -> typing.Generator[tuple[float, float, float], None, None]:
+def replicate(trials = 500, repeats = 1000, restricted=False) -> typing.Generator[tuple[float, float, float], None, None]:
     """
-    Solution for problem, see the notebook `random_walk.ipynb`.
+    Replicate (run) multiple random walk simulations.
     """
     for N in range(1, trials): # This loop can be parallelized, but how?
         # For each N repeat e.g 1000-times (trials) and calculate a mean distance R.
@@ -160,10 +160,10 @@ if __name__ == "__main__":
         # Show simualation overview and run.
         if EXAMPLE:
             TRIALS = 500     # cca 500
-            REPEATS = 10000  # cca 100
+            REPEATS = 1000   # cca 100
             print(f"Run 2D example with statistics: from 1 to {TRIALS} steps and {REPEATS} repeats per steps.")
 
-            result = solution(trials=TRIALS, repeats=REPEATS, restricted=RESTRICTED)
+            result = replicate(trials=TRIALS, repeats=REPEATS, restricted=RESTRICTED)
 
             # TODO This should be some function.
             with open(f"output/data-{'restricted' if RESTRICTED else 'simple'}.csv",'w') as out:
@@ -175,7 +175,7 @@ if __name__ == "__main__":
             print(f"---SUCCESS---{20 * ' '}")
         else:
             print(f"{MESSAGE}\n{'-' * len(MESSAGE)}")
-            match D: # Run simulation for specified diemension.
+            match D: # Run single simulation for specified diemension.
                 case 1:
                     data = simulate(steps = N, state = (0.0, [0.0]), restricted=RESTRICTED)
                 case 2:
