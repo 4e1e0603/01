@@ -64,7 +64,7 @@ Create a virtual environment.
 ```powershell
 py -3.10 -m venv .venv
 .venv\scripts\activate
-pip install matplotlib, seaborn, numpy, pandas
+pip install matplotlib seaborn numpy pandas
 ```
 
 Note: On Ubuntu may need to install `venv` module as `sudo apt-get install python-venv`. And invoke the 
