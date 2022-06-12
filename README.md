@@ -17,29 +17,29 @@ _Simulations of various types of random walks._
 ### Simple random walks
 
 <p float="left">
-<img src="output/RandomWalk1D-restricted=False.png" width="30.333%"/>
-<img src="output/RandomWalk2D-restricted=False.png" width="30.333%"/>
-<img src="output/RandomWalk3D-restricted=False.png" width="30.333%"/>
+<img src="random-walks/output/RandomWalk1D-restricted=False.png" width="30.333%"/>
+<img src="random-walks/output/RandomWalk2D-restricted=False.png" width="30.333%"/>
+<img src="random-walks/output/RandomWalk3D-restricted=False.png" width="30.333%"/>
 </p>
 
 ### Restricted random walks
 
 <p float="left">
-<img src="output/RandomWalk1D-restricted=True.png" width="30.333%"/>
-<img src="output/RandomWalk2D-restricted=True.png" width="30.333%"/>
-<img src="output/RandomWalk3D-restricted=True.png" width="30.333%"/>
+<img src="random-walks/output/RandomWalk1D-restricted=True.png" width="30.333%"/>
+<img src="random-walks/output/RandomWalk2D-restricted=True.png" width="30.333%"/>
+<img src="random-walks/output/RandomWalk3D-restricted=True.png" width="30.333%"/>
 </p>
 
 ### Random walk statistics
 
 <p float="left">
-<img src="output/RandomWalk2DStatisticsSimple1.png" width="49.5%"/>
-<img src="output/RandomWalk2DStatisticsSimple2.png" width="49.5%"/>
+<img src="random-walks/output/RandomWalk2DStatisticsSimple1.png" width="49.5%"/>
+<img src="random-walks/output/RandomWalk2DStatisticsSimple2.png" width="49.5%"/>
 </p>
 
 <p float="left">
-<img src="output/RandomWalk2DStatisticsRestricted1.png" width="49.5%"/>
-<img src="output/RandomWalk2DStatisticsRestricted2.png" width="49.5%"/>
+<img src="random-walks/output/RandomWalk2DStatisticsRestricted1.png" width="49.5%"/>
+<img src="random-walks/output/RandomWalk2DStatisticsRestricted2.png" width="49.5%"/>
 </p>
 
 ## Build and run
@@ -49,11 +49,11 @@ The presented images were produced by Python implementation.
 
 See the source files:
 
-- [random_walk.py module](source/random_walk.py)
-- [random_walk.ipynb notebook](source/random_walk.ipynb)
-- [random_walk.f90 module](source/random_walk.f90)
-- [random_walk_main.f90 program](source/random_walk_main.f90)
-- [random_walk_main.f90 test](source/random_walk_test.f90)
+- [random_walk.py module](random-walks/source/random_walk.py)
+- [random_walk.ipynb notebook](random-walks/source/random_walk.ipynb)
+- [random_walk.f90 module](random-walks/source/random_walk.f90)
+- [random_walk_main.f90 program](random-walks/source/random_walk_main.f90)
+- [random_walk_main.f90 test](random-walks/source/random_walk_test.f90)
 
 ### Python
 
